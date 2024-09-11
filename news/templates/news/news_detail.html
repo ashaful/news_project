@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ article.title }}</title>
+    <style>
+        /* Add your CSS styling here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background-color: #f4f4f4;
+            padding: 10px;
+            text-align: center;
+        }
+        section {
+            margin: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>News Finder</h1>
+    </header>
+    <section>
+        <h2>{{ article.title }}</h2>
+        <p><strong>Newspaper:</strong> {{ article.newspaper_name }}</p>
+        <p><strong>Date:</strong> {{ article.date }}</p>
+        <p><strong>Time:</strong> {{ article.time }}</p>
+        <p><strong>Category:</strong> {{ article.category }}</p>
+        <p>{{ article.content }}</p>
+        {% if article.image %}
+        <img src="{{ article.image.url }}" alt="News Image">
+        {% endif %}
+        <a href="{% url 'news_list' %}">Back to list</a>
+    </section>
+</body>
+</html>

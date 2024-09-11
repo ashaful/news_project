@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>News Finder</title>
+    <style>
+        /* Add your CSS styling here */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>News Finder</h1>
+    </header>
+    <section>
+        <h2>Archive all news in recent time</h2>
+        <form method="get" action="{% url 'news_list' %}">
+            <input type="text" name="q" placeholder="Search by name, category, or keywords">
+            <button type="submit">Search</button>
+            
+            <label for="date-filter">Filter by date:</label>
+            <input type="date" id="date-filter" name="date">
+            
+            <label for="newspaper-filter">Filter by newspaper:</label>
+            <select id="newspaper-filter" name="newspaper">
+                <option value="">Select newspaper</option>
+                <option value="Daily Star">Daily Star</option>
+                <option value="Daily Prothom Alo">Daily Prothom Alo</option>
+            </select>
+        </form>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Newspaper</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in articles %}
+                <tr>
+                    <td><a href="{% url 'news_detail' article.id %}">{{ article.title }}</a></td>
+                    <td>{{ article.newspaper_name }}</td>
+                    <td>{{ article.date }}</td>
+                    <td>{{ article.time }}</td>
+                    <td>{{ article.category }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
